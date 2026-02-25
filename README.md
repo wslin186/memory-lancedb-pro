@@ -378,31 +378,31 @@ Cross-encoder reranking supports multiple providers via `rerankProvider`:
 
 ```bash
 # List memories
-openclaw memory list [--scope global] [--category fact] [--limit 20] [--json]
+openclaw memory-pro list [--scope global] [--category fact] [--limit 20] [--json]
 
 # Search memories
-openclaw memory search "query" [--scope global] [--limit 10] [--json]
+openclaw memory-pro search "query" [--scope global] [--limit 10] [--json]
 
 # View statistics
-openclaw memory stats [--scope global] [--json]
+openclaw memory-pro stats [--scope global] [--json]
 
 # Delete a memory by ID (supports 8+ char prefix)
-openclaw memory delete <id>
+openclaw memory-pro delete <id>
 
 # Bulk delete with filters
-openclaw memory delete-bulk --scope global [--before 2025-01-01] [--dry-run]
+openclaw memory-pro delete-bulk --scope global [--before 2025-01-01] [--dry-run]
 
 # Export / Import
-openclaw memory export [--scope global] [--output memories.json]
-openclaw memory import memories.json [--scope global] [--dry-run]
+openclaw memory-pro export [--scope global] [--output memories.json]
+openclaw memory-pro import memories.json [--scope global] [--dry-run]
 
 # Re-embed all entries with a new model
-openclaw memory reembed --source-db /path/to/old-db [--batch-size 32] [--skip-existing]
+openclaw memory-pro reembed --source-db /path/to/old-db [--batch-size 32] [--skip-existing]
 
 # Migrate from built-in memory-lancedb
-openclaw memory migrate check [--source /path]
-openclaw memory migrate run [--source /path] [--dry-run] [--skip-existing]
-openclaw memory migrate verify [--source /path]
+openclaw memory-pro migrate check [--source /path]
+openclaw memory-pro migrate run [--source /path] [--dry-run] [--skip-existing]
+openclaw memory-pro migrate verify [--source /path]
 ```
 
 ---

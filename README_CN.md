@@ -333,31 +333,31 @@ openclaw config get plugins.slots.memory
 
 ```bash
 # 列出记忆
-openclaw memory list [--scope global] [--category fact] [--limit 20] [--json]
+openclaw memory-pro list [--scope global] [--category fact] [--limit 20] [--json]
 
 # 搜索记忆
-openclaw memory search "query" [--scope global] [--limit 10] [--json]
+openclaw memory-pro search "query" [--scope global] [--limit 10] [--json]
 
 # 查看统计
-openclaw memory stats [--scope global] [--json]
+openclaw memory-pro stats [--scope global] [--json]
 
 # 按 ID 删除记忆（支持 8+ 字符前缀）
-openclaw memory delete <id>
+openclaw memory-pro delete <id>
 
 # 批量删除
-openclaw memory delete-bulk --scope global [--before 2025-01-01] [--dry-run]
+openclaw memory-pro delete-bulk --scope global [--before 2025-01-01] [--dry-run]
 
 # 导出 / 导入
-openclaw memory export [--scope global] [--output memories.json]
-openclaw memory import memories.json [--scope global] [--dry-run]
+openclaw memory-pro export [--scope global] [--output memories.json]
+openclaw memory-pro import memories.json [--scope global] [--dry-run]
 
 # 使用新模型重新生成 Embedding
-openclaw memory reembed --source-db /path/to/old-db [--batch-size 32] [--skip-existing]
+openclaw memory-pro reembed --source-db /path/to/old-db [--batch-size 32] [--skip-existing]
 
 # 从内置 memory-lancedb 迁移
-openclaw memory migrate check [--source /path]
-openclaw memory migrate run [--source /path] [--dry-run] [--skip-existing]
-openclaw memory migrate verify [--source /path]
+openclaw memory-pro migrate check [--source /path]
+openclaw memory-pro migrate run [--source /path] [--dry-run] [--skip-existing]
+openclaw memory-pro migrate verify [--source /path]
 ```
 
 ---
