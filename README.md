@@ -161,16 +161,27 @@ Filters out low-quality content at both auto-capture and tool-store stages:
 
 ## Installation
 
-1. Clone into your OpenClaw plugins directory:
+### What is the “OpenClaw workspace”?
+
+In this README, **OpenClaw workspace** means the directory where you keep your OpenClaw config (e.g. `openclaw.json`) and from which you run/manage the gateway.
+
+**Common mistake:** cloning the plugin somewhere else, while keeping `plugins.load.paths: ["plugins/memory-lancedb-pro"]` (a **relative path**). In that case OpenClaw will look for the plugin under your workspace and fail to load it.
+
+### Option A (recommended): clone into `plugins/` under your workspace
 
 ```bash
+# 1) Go to your OpenClaw workspace (the directory that contains your openclaw.json)
 cd /path/to/your/openclaw/workspace
+
+# 2) Clone the plugin into workspace/plugins/
 git clone https://github.com/win4r/memory-lancedb-pro.git plugins/memory-lancedb-pro
+
+# 3) Install dependencies
 cd plugins/memory-lancedb-pro
 npm install
 ```
 
-2. Add to your OpenClaw config (`openclaw.json`):
+Then reference it with a relative path in your OpenClaw config:
 
 ```json
 {
@@ -201,7 +212,19 @@ npm install
 }
 ```
 
-3. Restart the gateway:
+### Option B: clone anywhere, but use an absolute path
+
+```json
+{
+  "plugins": {
+    "load": {
+      "paths": ["/absolute/path/to/memory-lancedb-pro"]
+    }
+  }
+}
+```
+
+### Restart
 
 ```bash
 openclaw gateway restart

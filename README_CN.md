@@ -162,16 +162,27 @@ Query → BM25 FTS ─────┘
 
 ## 安装
 
-1. 克隆到 OpenClaw 插件目录：
+### 什么是 “OpenClaw workspace”？
+
+本文档中的 **OpenClaw workspace** 指的是：你存放 OpenClaw 配置文件（例如 `openclaw.json`），并且从该目录运行/管理 gateway 的工作目录。
+
+**最常见的安装错误：** 把插件 clone 到别的目录，但在配置里仍然写 `"paths": ["plugins/memory-lancedb-pro"]`（这是**相对路径**）。OpenClaw 会去 workspace 下找 `plugins/memory-lancedb-pro`，导致加载失败，于是出现“安装位置不对”的反馈。
+
+### 方案 A（推荐）：克隆到 workspace 的 `plugins/` 目录下
 
 ```bash
+# 1) 进入你的 OpenClaw workspace（包含 openclaw.json 的目录）
 cd /path/to/your/openclaw/workspace
+
+# 2) 把插件克隆到 workspace/plugins/ 下
 git clone https://github.com/win4r/memory-lancedb-pro.git plugins/memory-lancedb-pro
+
+# 3) 安装依赖
 cd plugins/memory-lancedb-pro
 npm install
 ```
 
-2. 在 OpenClaw 配置中添加（`openclaw.json`）：
+然后在 OpenClaw 配置（`openclaw.json`）中使用相对路径：
 
 ```json
 {
@@ -202,7 +213,19 @@ npm install
 }
 ```
 
-3. 重启 Gateway：
+### 方案 B：插件装在任意目录，但配置里必须写绝对路径
+
+```json
+{
+  "plugins": {
+    "load": {
+      "paths": ["/absolute/path/to/memory-lancedb-pro"]
+    }
+  }
+}
+```
+
+### 重启
 
 ```bash
 openclaw gateway restart
