@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Fix: `embedding.dimensions` is now parsed robustly (number / numeric string / env-var string), so it properly overrides hardcoded model dims (fixes Ollama `nomic-embed-text` dimension mismatch).
+
 ## 1.0.3
 
 - Fix: `memory-pro reembed` no longer crashes (missing `clampInt` helper).

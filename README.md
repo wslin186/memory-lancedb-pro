@@ -326,7 +326,7 @@ This plugin works with **any OpenAI-compatible embedding API**:
 | **Jina** (recommended) | `jina-embeddings-v5-text-small` | `https://api.jina.ai/v1` | 1024 |
 | **OpenAI** | `text-embedding-3-small` | `https://api.openai.com/v1` | 1536 |
 | **Google Gemini** | `gemini-embedding-001` | `https://generativelanguage.googleapis.com/v1beta/openai/` | 3072 |
-| **Ollama** (local) | `nomic-embed-text` | `http://localhost:11434/v1` | 768 |
+| **Ollama** (local) | `nomic-embed-text` | `http://localhost:11434/v1` | _provider-specific_ (set `embedding.dimensions` to match your Ollama model output) |
 
 ### Rerank Providers
 
