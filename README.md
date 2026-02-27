@@ -161,6 +161,22 @@ Filters out low-quality content at both auto-capture and tool-store stages:
 
 ## Installation
 
+### AI-safe install notes (anti-hallucination)
+
+If you are following this README using an AI assistant, **do not assume defaults**. Always run these commands first and use the real output:
+
+```bash
+openclaw config get agents.defaults.workspace
+openclaw config get plugins.load.paths
+openclaw config get plugins.slots.memory
+openclaw config get plugins.entries.memory-lancedb-pro
+```
+
+Recommendations:
+- Prefer **absolute paths** in `plugins.load.paths` unless you have confirmed the active workspace.
+- If you use `${JINA_API_KEY}` (or any `${...}` variable) in config, ensure the **Gateway service process** has that environment variable (system services often do **not** inherit your interactive shell env).
+- After changing plugin config, run `openclaw gateway restart`.
+
 ### What is the “OpenClaw workspace”?
 
 In OpenClaw, the **agent workspace** is the agent’s working directory (default: `~/.openclaw/workspace`).
@@ -168,7 +184,9 @@ According to the docs, the workspace is the **default cwd**, and **relative path
 
 > Note: OpenClaw configuration typically lives under `~/.openclaw/openclaw.json` (separate from the workspace).
 
-**Common mistake:** cloning the plugin somewhere else, while keeping `plugins.load.paths: ["plugins/memory-lancedb-pro"]` (a **relative path**). In that case OpenClaw will look for `plugins/memory-lancedb-pro` under your **workspace** and fail to load it.
+**Common mistake:** cloning the plugin somewhere else, while keeping a **relative path** like `plugins.load.paths: ["plugins/memory-lancedb-pro"]`. Relative paths can be resolved against different working directories depending on how the Gateway is started.
+
+To avoid ambiguity, use an **absolute path** (Option B) or clone into `<workspace>/plugins/` (Option A) and keep your config consistent.
 
 ### Option A (recommended): clone into `plugins/` under your workspace
 

@@ -162,6 +162,22 @@ Query → BM25 FTS ─────┘
 
 ## 安装
 
+### AI 安装指引（防幻觉版）
+
+如果你是用 AI 按 README 操作，**不要假设任何默认值**。请先运行以下命令，并以真实输出为准：
+
+```bash
+openclaw config get agents.defaults.workspace
+openclaw config get plugins.load.paths
+openclaw config get plugins.slots.memory
+openclaw config get plugins.entries.memory-lancedb-pro
+```
+
+建议：
+- `plugins.load.paths` 建议优先用**绝对路径**（除非你已确认当前 workspace）。
+- 如果配置里使用 `${JINA_API_KEY}`（或任何 `${...}` 变量），务必确保运行 Gateway 的**服务进程环境**里真的有这些变量（systemd/launchd/docker 通常不会继承你终端的 export）。
+- 修改插件配置后，运行 `openclaw gateway restart` 使其生效。
+
 ### 什么是 “OpenClaw workspace”？
 
 在 OpenClaw 中，**agent workspace（工作区）** 是 Agent 的工作目录（默认：`~/.openclaw/workspace`）。
@@ -169,7 +185,9 @@ Query → BM25 FTS ─────┘
 
 > 说明：OpenClaw 的配置文件通常在 `~/.openclaw/openclaw.json`，与 workspace 是分开的。
 
-**最常见的安装错误：** 把插件 clone 到别的目录，但在配置里仍然写 `"paths": ["plugins/memory-lancedb-pro"]`（这是**相对路径**）。OpenClaw 会去 workspace 下找 `plugins/memory-lancedb-pro`，导致加载失败，于是出现“安装位置不对”的反馈。
+**最常见的安装错误：** 把插件 clone 到别的目录，但在配置里仍然写类似 `"paths": ["plugins/memory-lancedb-pro"]` 的**相对路径**。相对路径的解析基准会受 Gateway 启动方式/工作目录影响，容易指向错误位置。
+
+为避免歧义：建议用**绝对路径**（方案 B），或把插件放在 `<workspace>/plugins/`（方案 A）并保持配置一致。
 
 ### 方案 A（推荐）：克隆到 workspace 的 `plugins/` 目录下
 
